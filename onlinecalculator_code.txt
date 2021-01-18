@@ -1,0 +1,98 @@
+public class testcalculator {
+         WebDriver driver=null;
+		  @Test (priority =3)
+		  public void addition() {  
+		  System.setProperty("webdriver.chrome.driver","driver/chromedriver.exe");
+		  driver=new ChromeDriver();
+		  driver.get("https://www.calculator.net/"); 
+		  driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS );
+		  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		  driver.findElement(By.xpath( "//span[contains(@onclick,'-')]")).click(); String
+		  num="234234"; char[] arr=num.toCharArray(); 
+		  for(int i=0;i<arr.length;i++) {
+		  driver.findElement(By.xpath("//span[text()='"+arr[i]+"']")).click(); 
+		  }
+		  driver.findElement(By.xpath("//span[text()='+']")).click(); 
+		  String num1="345345"; char[] arr1=num1.toCharArray(); 
+		  for(int i=0;i<arr1.length;i++)
+		  { 
+			  driver.findElement(By.xpath("//span[text()='"+arr1[i]+"']")).click(); 
+			  }
+		  driver.findElement(By.xpath("//span[text()='=']")).click(); 
+		  String box=driver.findElement(By.id("sciOutPut")).getText();
+		  System.out.println("addition result " +box); 
+		  Assert.assertEquals(box," 111111");
+		  driver.close();
+		  }
+		  
+		 
+	@Test(priority =4)
+	public void subtraction() {
+		System.setProperty("webdriver.chrome.driver","driver/chromedriver.exe");
+	        driver=new ChromeDriver();
+		driver.get("https://www.calculator.net/");
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS );
+		String num1="234823"; //-23094823
+		char[] a=num1.toCharArray();
+		for(int i=0;i<a.length;i++) {
+			 driver.findElement(By.xpath("//span[text()='"+a[i]+"']")).click();
+		}
+		driver.findElement(By.xpath("//span[contains(@onclick,'-')]")).click();
+		driver.findElement(By.xpath("//span[contains(@onclick,'-')]")).click();
+		String num2="23094823";
+		char[] b=num2.toCharArray();
+		for(int i=0;i<b.length;i++)
+		{
+			 driver.findElement(By.xpath("//span[text()='"+b[i]+"']")).click();
+			
+		}		String box=driver.findElement(By.id("sciOutPut")).getText();
+		System.out.println("sub result"+box);
+		Assert.assertEquals(box," 23329646");
+		driver.close();
+	}
+	//423*525 mul    op=222075
+	//div 4000/200  op20
+	@Test(priority =1)
+	public void multiplication() {
+		System.setProperty("webdriver.chrome.driver","driver/chromedriver.exe");
+	        driver=new ChromeDriver();
+		driver.get("https://www.calculator.net/");
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS );
+		String num1="423"; //-23094823
+		char[] a=num1.toCharArray();
+		for(int i=0;i<a.length;i++) {
+			 driver.findElement(By.xpath("//span[text()='"+a[i]+"']")).click();
+		}driver.findElement(By.xpath("//span[contains(@onclick,'*')]")).click();
+		String num2="525";
+		char b[]=num2.toCharArray();
+		for(int i=0;i<b.length;i++) {
+			 driver.findElement(By.xpath("//span[text()='"+b[i]+"']")).click();
+			
+		}String box=driver.findElement(By.id("sciOutPut")).getText();
+		System.out.println("multiplication result"+box);
+		Assert.assertEquals(box," 222075");
+		driver.close();
+	}
+	@Test(priority =2)
+	public void division() {
+		System.setProperty("webdriver.chrome.driver","driver/chromedriver.exe");
+	        driver=new ChromeDriver();	
+		driver.get("https://www.calculator.net/");
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS );
+		String n1="4000";
+		char a[]=n1.toCharArray();
+		for(int i=0;i<a.length;i++) {
+			driver.findElement(By.xpath("//span[text()='"+a[i]+"']")).click();
+			
+		}driver.findElement(By.xpath("//span[text()='/']")).click();
+		String n2="200";
+				char b[]=n2.toCharArray();
+		for(int i=0;i<b.length;i++) {
+			driver.findElement(By.xpath("//span[text()='"+b[i]+"']")).click();
+		}
+		String box=driver.findElement(By.id("sciOutPut")).getText();
+		System.out.println("division result"+box);
+		Assert.assertEquals(box," 20");
+		driver.close();
+	}
+  }
